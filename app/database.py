@@ -3,10 +3,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from app.config import settings
 
-# Normalize Render postgres:// URL to postgresql:// for SQLAlchemy
-db_url = settings.DATABASE_URL
-if db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
+# Normalize database URL (handle empty string from Render sync:false, and normalize postgres://)
+raw_url = (settings.DATABASE_URL or "").strip()
+if not raw_url:
+    db_url = "sqlite:///./shortx.db"
+elif raw_url.startswith("postgres://"):
+    db_url = raw_url.replace("postgres://", "postgresql://", 1)
+else:
+    db_url = raw_url
 
 # Engine configuration
 connect_args = {}
