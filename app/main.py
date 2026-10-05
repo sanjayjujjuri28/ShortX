@@ -60,7 +60,7 @@ if os.path.exists(STATIC_DIR):
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
-@app.get("/health", tags=["System"])
+@app.api_route("/health", methods=["GET", "HEAD"], tags=["System"])
 def health_check():
     """Health check for API, Database, and Redis cache."""
     from sqlalchemy import text
@@ -92,7 +92,7 @@ app.include_router(analytics_router)
 
 
 # Root route serves the single page application
-@app.get("/", response_class=FileResponse, tags=["Web"])
+@app.api_route("/", methods=["GET", "HEAD"], response_class=FileResponse, tags=["Web"])
 async def serve_index():
     index_path = os.path.join(STATIC_DIR, "index.html")
     if os.path.exists(index_path):
