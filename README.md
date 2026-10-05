@@ -2,6 +2,13 @@
 
 <div align="center">
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-shortx--95k9.onrender.com-00C7B7?style=for-the-badge&logo=render&logoColor=white)](https://shortx-95k9.onrender.com)
+
+### 🌐 **Live Application:** [https://shortx-95k9.onrender.com](https://shortx-95k9.onrender.com)
+📚 **Interactive Swagger API Docs:** [https://shortx-95k9.onrender.com/docs](https://shortx-95k9.onrender.com/docs)
+
+<br/>
+
 ![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)
@@ -12,7 +19,7 @@
 
 **A production-grade, minimalist URL shortening and analytics platform engineered to showcase core Software Development Engineer (SDE) backend principles.**
 
-[Live Flow Demo](#-user-flow) • [System Architecture](#-system-architecture) • [Redis Deep Dive](#-redis-engineering-decisions) • [API Reference](#-api-architecture) • [Getting Started](#-getting-started)
+[🌐 Live Demo](https://shortx-95k9.onrender.com) • [User Flow](#-user-flow) • [System Architecture](#-system-architecture) • [Redis Deep Dive](#-redis-engineering-decisions) • [API Reference](#-api-architecture) • [Getting Started](#-getting-started)
 
 </div>
 
@@ -184,6 +191,13 @@ tests/test_urls.py::test_delete_url PASSED                               [100%]
 ---
 
 ## 🚀 Getting Started
+
+### 🌐 Live Production Deployment
+- **Web Application:** [https://shortx-95k9.onrender.com](https://shortx-95k9.onrender.com)
+- **Interactive Swagger API Docs:** [https://shortx-95k9.onrender.com/docs](https://shortx-95k9.onrender.com/docs)
+- **Health Check Endpoint:** [https://shortx-95k9.onrender.com/health](https://shortx-95k9.onrender.com/health)
+
+---
 
 ### Method A: Docker Compose (Full Stack with PostgreSQL & Redis)
 
