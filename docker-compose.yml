@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shortx_app
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_NAME=ShortX
+      - APP_ENV=production
+      - DEBUG=False
+      - BASE_URL=http://localhost:8000
+      - SECRET_KEY=shortx-docker-compose-production-secret-key-min-32-chars
+      - DATABASE_URL=postgresql://shortx_user:shortx_pass@db:5432/shortx_db
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_CACHE_TTL=86400
+      - RATE_LIMIT_REQUESTS=100
+      - RATE_LIMIT_WINDOW_SECONDS=60
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    container_name: shortx_db
+    restart: always
+    environment:
+      POSTGRES_USER: shortx_user
+      POSTGRES_PASSWORD: shortx_pass
+      POSTGRES_DB: shortx_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shortx_user -d shortx_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: shortx_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:
