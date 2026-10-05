@@ -18,18 +18,10 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
-        fromDatabase:
-          name: shortx-db
-          property: connectionString
+        sync: false
       - key: REDIS_URL
         value: redis://localhost:6379/0
       - key: RATE_LIMIT_REQUESTS
         value: "100"
       - key: RATE_LIMIT_WINDOW_SECONDS
         value: "60"
-
-databases:
-  - name: shortx-db
-    databaseName: shortx_db
-    user: shortx_user
-    plan: free
