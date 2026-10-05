@@ -3,12 +3,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from app.config import settings
 
-# Normalize database URL (handle empty string from Render sync:false, and normalize postgres://)
+# Normalize database URL (handle empty string, convert postgres:// or postgresql:// to postgresql+psycopg2://)
 raw_url = (settings.DATABASE_URL or "").strip()
 if not raw_url:
     db_url = "sqlite:///./shortx.db"
 elif raw_url.startswith("postgres://"):
-    db_url = raw_url.replace("postgres://", "postgresql://", 1)
+    db_url = raw_url.replace("postgres://", "postgresql+psycopg2://", 1)
+elif raw_url.startswith("postgresql://") and not raw_url.startswith("postgresql+"):
+    db_url = raw_url.replace("postgresql://", "postgresql+psycopg2://", 1)
 else:
     db_url = raw_url
 

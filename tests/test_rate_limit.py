@@ -11,7 +11,7 @@ def test_rate_limiter_blocks_excessive_requests(client):
     email_pattern = "ratelimit_user_{}@example.com"
     responses = []
     # signup limit is 20 in 60s
-    for i in range(22):
+    for i in range(25):
         r = client.post(
             "/auth/signup",
             json={"email": email_pattern.format(i), "password": "passwordsafe123"}
