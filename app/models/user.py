@@ -5,7 +5,7 @@ from app.database import Base
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = "shortx_users"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     email = Column(String(255), unique=True, index=True, nullable=False)
